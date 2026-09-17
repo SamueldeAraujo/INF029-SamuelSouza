@@ -2,11 +2,13 @@
 #include <stdlib.h>
 
 #define TAMANHO_CEL 3
+#define TAMANHO_NOME 20
 
 typedef struct {
     int id;
     int ano;
     float preco;
+    char nome[TAMANHO_NOME];
 } Celular;
 
 int sair_menu();
@@ -39,10 +41,12 @@ int main(){
             break;
         
         case 1:
-            printf("Digite o ano: ");
+            printf("\nDigite o nome do modelo: ");
+            fgets(listaCelulares[qtdCelulares].nome, TAMANHO_NOME, stdin);
+            printf("\nDigite o ano: ");
             scanf("%d", &listaCelulares[qtdCelulares].ano);
-            printf("Digite o preço: ");
-            scanf("%d", &listaCelulares[qtdCelulares].preco);
+            printf("\nDigite o preço: ");
+            scanf("%f", &listaCelulares[qtdCelulares].preco);
             listaCelulares[qtdCelulares].id = idAtual;            
 
             qtdCelulares++;
