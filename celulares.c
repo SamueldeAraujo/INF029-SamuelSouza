@@ -1,17 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define TAMANHO_CEL 3
-#define TAMANHO_NOME 20
+#define TAMANHO_CEL 5
 
 typedef struct {
     int id;
     int ano;
     float preco;
-    char nome[TAMANHO_NOME];
 } Celular;
 
-int sair_menu();
+//int sair_menu();
 
 int main(){
 
@@ -23,7 +21,7 @@ int main(){
     
 
     while (sair == 0){
-        printf("Digite a opção: \n");
+        printf("\nDigite a opção: \n");
         printf("0 - Sair \n");
         printf("1 - Inserir \n");
         printf("2 - Listar \n");
@@ -41,29 +39,38 @@ int main(){
             break;
         
         case 1:
-            printf("\nDigite o nome do modelo: ");
-            fgets(listaCelulares[qtdCelulares].nome, TAMANHO_NOME, stdin);
+            if (qtdCelulares > TAMANHO_CEL){
+                printf("\nLimite de celulares cadastrados atingido");
+                break;
+            }  
+
             printf("\nDigite o ano: ");
             scanf("%d", &listaCelulares[qtdCelulares].ano);
-            printf("\nDigite o preço: ");
+            printf("Digite o preço: ");
             scanf("%f", &listaCelulares[qtdCelulares].preco);
-            listaCelulares[qtdCelulares].id = idAtual;            
+            listaCelulares[qtdCelulares].id = idAtual;     
+            
+            printf("Celular ID: %d - Ano: %d - Preço: %.2f Cadastrado com sucesso!\n", listaCelulares[qtdCelulares].id, listaCelulares[qtdCelulares].ano, listaCelulares[qtdCelulares].preco);
 
             qtdCelulares++;
             idAtual++;
 
+            break;
+        case 2:
+            for(int i = 0; i < qtdCelulares; i++)
+                printf("ID: %d - Ano: %d - Preço: %.2f\n", listaCelulares[i].id, listaCelulares[i].ano, listaCelulares[i].preco);
+            break;
+        case 3:
+            // atualizar cadastro de um celular especifico, procurando pelo id (posição no vetor)
+            break;
+        case 4:
+            // deletar celular pelo id.
+            break;
         default:
             break;
+        
         }
-
-
-
     }
 
-
-
-
-
-
-    
+    return 0;
 }
