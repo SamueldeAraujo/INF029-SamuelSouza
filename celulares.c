@@ -37,7 +37,7 @@ int main(){
             break;
         
         case 1:
-            if (qtdCelulares > TAMANHO_CEL){
+            if (qtdCelulares >= TAMANHO_CEL){
                 printf("\nLimite de celulares cadastrados atingido");
                 break;
             }  
@@ -59,38 +59,42 @@ int main(){
             break;
         case 3:
             int idBusca;
+            int encontrado = 0;
             printf("Informe o ID do celular a ter o cadastro atualizado: ");
             scanf("%d", &idBusca);
 
-            for (int i = 0; i < TAMANHO_CEL; i++){
+            for (int i = 0; i < qtdCelulares; i++){
                 if (listaCelulares[i].id == idBusca){
-                    printf("ID: %d - Ano: %d - Preço: %.2f\n", listaCelulares[i].id, listaCelulares[i].ano, listaCelulares[i].preco);
-                    
+                    encontrado = 1;
+                    printf(
+                        "ID: %d - Ano: %d - Preço: %.2f\n",
+                        listaCelulares[i].id,
+                        listaCelulares[i].ano,
+                        listaCelulares[i].preco
+                    );
                     printf("\nDigite o ano: ");
                     scanf("%d", &listaCelulares[i].ano);
                     printf("Digite o preço: ");
-                    scanf("%f", &listaCelulares[i].preco);
-                    listaCelulares[i].id = idAtual; 
+                    scanf("%f", &listaCelulares[i].preco); 
 
                     printf("Atualizado com sucesso!\n");
                     break;
-                }
-
-                if (listaCelulares[i].id > idBusca){
-                    printf("Não encontrado.");
-                    break;
-                }
+                }// if
             }//for geral
+            if (encontrado == 0) {
+                printf("Celular não encontrado.\n");
+            }// if
             break;
         case 4:
-            
             int idDeletar;
             int opcaoDeletar;
+            int encontradoDeletar = 0;
             printf("Informe o ID do celular a ser deletado: ");
             scanf("%d", &idDeletar);
             
             for (int i = 0; i < qtdCelulares; i++){
                 if(listaCelulares[i].id == idDeletar){
+                    encontradoDeletar = 1;
                     printf(
                         "ID: %d - Ano: %d - Preço: %.2f\n",
                         listaCelulares[i].id,
@@ -113,16 +117,14 @@ int main(){
                         break;
                     }
                 }
-                if (listaCelulares[i].id > idDeletar){
-                    printf("Não encontrado.");
-                    break;                    
-                }
+            }
+            if (encontradoDeletar == 0) {
+                printf("Celular não encontrado.\n");
             }//for geral
             break;
         default:
             break;
         } //switch
     }//while
-
     return 0;
 }//main
