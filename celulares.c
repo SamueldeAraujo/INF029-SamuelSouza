@@ -18,7 +18,6 @@ int main(){
     int sair = 0;
     int idAtual = 1;
     int qtdCelulares = 0;
-    
 
     while (sair == 0){
         printf("\nDigite a opção: \n");
@@ -33,7 +32,6 @@ int main(){
 
         switch (opcao){
         case 0:
-            
             printf("\nSaindo...\n");
             sair = 1;
             break;
@@ -54,7 +52,6 @@ int main(){
 
             qtdCelulares++;
             idAtual++;
-
             break;
         case 2:
             for(int i = 0; i < qtdCelulares; i++)
@@ -66,7 +63,6 @@ int main(){
             scanf("%d", &idBusca);
 
             for (int i = 0; i < TAMANHO_CEL; i++){
-
                 if (listaCelulares[i].id == idBusca){
                     printf("ID: %d - Ano: %d - Preço: %.2f\n", listaCelulares[i].id, listaCelulares[i].ano, listaCelulares[i].preco);
                     
@@ -84,20 +80,49 @@ int main(){
                     printf("Não encontrado.");
                     break;
                 }
-
-            }
-            
-
-            
+            }//for geral
             break;
         case 4:
-            // deletar celular pelo id.
+            
+            int idDeletar;
+            int opcaoDeletar;
+            printf("Informe o ID do celular a ser deletado: ");
+            scanf("%d", &idDeletar);
+            
+            for (int i = 0; i < qtdCelulares; i++){
+                if(listaCelulares[i].id == idDeletar){
+                    printf(
+                        "ID: %d - Ano: %d - Preço: %.2f\n",
+                        listaCelulares[i].id,
+                        listaCelulares[i].ano,
+                        listaCelulares[i].preco
+                    );
+                    printf("Deseja deletar este celular?\n");
+                    printf("[0 - SIM] [1 - NÃO]\n");
+                    scanf("%d", &opcaoDeletar);
+
+                    if (opcaoDeletar == 0){
+                        for (int j = i; j < qtdCelulares - 1; j++){
+                            listaCelulares[j] = listaCelulares[j + 1];
+                        }
+                        qtdCelulares--;
+                        printf("Celular deletado com sucesso!\n");
+                        break;
+                    } else {
+                        printf("Operação cancelada.\n");
+                        break;
+                    }
+                }
+                if (listaCelulares[i].id > idDeletar){
+                    printf("Não encontrado.");
+                    break;                    
+                }
+            }//for geral
             break;
         default:
             break;
-        
-        }
-    }
+        } //switch
+    }//while
 
     return 0;
-}
+}//main
