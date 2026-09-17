@@ -61,7 +61,34 @@ int main(){
                 printf("ID: %d - Ano: %d - Preço: %.2f\n", listaCelulares[i].id, listaCelulares[i].ano, listaCelulares[i].preco);
             break;
         case 3:
-            // atualizar cadastro de um celular especifico, procurando pelo id (posição no vetor)
+            int idBusca;
+            printf("Informe o ID do celular a ter o cadastro atualizado: ");
+            scanf("%d", &idBusca);
+
+            for (int i = 0; i < TAMANHO_CEL; i++){
+
+                if (listaCelulares[i].id == idBusca){
+                    printf("ID: %d - Ano: %d - Preço: %.2f\n", listaCelulares[i].id, listaCelulares[i].ano, listaCelulares[i].preco);
+                    
+                    printf("\nDigite o ano: ");
+                    scanf("%d", &listaCelulares[i].ano);
+                    printf("Digite o preço: ");
+                    scanf("%f", &listaCelulares[i].preco);
+                    listaCelulares[i].id = idAtual; 
+
+                    printf("Atualizado com sucesso!\n");
+                    break;
+                }
+
+                if (listaCelulares[i].id > idBusca){
+                    printf("Não encontrado.");
+                    break;
+                }
+
+            }
+            
+
+            
             break;
         case 4:
             // deletar celular pelo id.
